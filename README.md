@@ -1,5 +1,6 @@
 # Odoo-hackathon
 
+
 # Garbage Management Application
 
 ## Overview
