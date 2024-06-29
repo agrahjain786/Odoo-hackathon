@@ -1,0 +1,65 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 100vw;
+    height: 10vh; */
+    background: white;
+}
+.head{
+    width: 50vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.onlychoice{
+    font-size: 1rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 20vw;
+    background: white;
+    cursor: pointer;
+    
+}
+.selectedpgchoice{
+    font-size: 1rem;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    height: 10vh;
+    width: 20vw;
+    color:white;
+    cursor: pointer;
+    /* font-family: 'Secular One', sans-serif; */
+}
+
+.location{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap:1.2rem;
+    background: green;
+    height: 2.5rem;
+    width: 14rem;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    margin-right: 2vw;
+    color: white;
+    font-family: sans-serif;
+    font-weight: 100;
+}
+.location span{
+    font-size: 1.3rem;
+    filter: invert(100%);
+    font-family: 'Secular One', sans-serif;
+}
+
+.Navbar{
+    box-shadow: 7px 2px 10px 2px green;
+}

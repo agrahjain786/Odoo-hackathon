@@ -1,0 +1,106 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.basecover{
+    display: flex;
+    justify-content: center;
+}
+.base{
+    background:center center no-repeat url('https://good-nature-blog-uploads.s3.amazonaws.com/uploads/2022/01/good-nature-homepage-hero_2-scaled.jpg');
+    height: 80vh;
+    width:100vw;
+    /* background-size:auto; */
+    margin-right: 0;
+    overflow:hidden;
+}
+
+.tagline{
+    font-size: 3rem;
+    color: white;
+    display: flex;
+    margin-left: 10vw;
+    margin-top: 10vh;
+}
+.tagline span{
+    width: 45rem; 
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px #8490a9;
+    font-family: 'Ramabhadra', sans-serif;
+}
+
+.logodiv{
+    margin-top: 1rem;
+    margin-left: 10vw;
+}
+.options{
+    display: flex;
+}
+.opchoice{
+    width: 33.33vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: green;
+    cursor: pointer;
+    color: white;
+    /* font-family: 'Secular One', sans-serif; */
+}
+#hospitalchoice{
+    background: white;
+    color:  #2B96CC;
+}
+
+.hosp_head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color:  green;
+    /* font-family: 'Secular One', sans-serif; */
+    height: 25vh;
+}
+.images{
+    display: flex;
+    justify-content: space-around;
+}
+.images img{
+    height: 40vh;
+    width: 20vw;
+    border-radius:0.5rem;
+    object-fit: cover;
+}
+.hospt_img,.hospitalstate{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    font-weight: bold;
+    gap:0.5rem;
+    /* font-family: 'Secular One', sans-serif;  */
+}
+.combine{
+    margin-top: -7rem;
+    margin-left: 1rem;
+    color: white;
+    margin-bottom: 4rem;
+}
+
+.stickavail{
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:20rem;
+    right: 0;
+    height: 2.5rem;
+    top:30vh;
+    background: white;
+    font-size: 1.4rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    cursor: pointer;
+}
