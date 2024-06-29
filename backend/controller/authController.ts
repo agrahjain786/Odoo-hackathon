@@ -1,5 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { Request, Response } from "express";
+import { AuthRequest } from "../interfaces/authRequest";
 
 // Errors
 import BadRequestError from "../errors/bad-request";
@@ -11,7 +12,6 @@ import CollectorModel from "../models/users/collector";
 import { getSignedJwtToken } from "../helpers/jwt";
 import { comparePassword } from "../helpers/bcrypt";
 import { hashPassword } from "./../helpers/bcrypt";
-import { AuthRequest } from "../interfaces/authRequest";
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -31,7 +31,7 @@ export const signUp = async (req: Request, res: Response) => {
     address,
     city,
     state,
-    pincode,
+    pin,
     latitude,
     longitude,
   } = req.body;
@@ -42,7 +42,7 @@ export const signUp = async (req: Request, res: Response) => {
 
   if (
     role === "Collector" &&
-    (!address || !city || !state || !pincode || !latitude || !longitude)
+    (!address || !city || !state || !pin || !latitude || !longitude)
   ) {
     throw new BadRequestError(
       "Please provide address, city, state, pincode, latitude and longitude"
@@ -79,7 +79,7 @@ export const signUp = async (req: Request, res: Response) => {
       address,
       city,
       state,
-      pincode,
+      pincode: pin,
       location: {
         type: "Point",
         coordinates: [longitude, latitude],

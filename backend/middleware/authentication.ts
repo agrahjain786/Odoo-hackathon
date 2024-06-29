@@ -1,16 +1,10 @@
-import { Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 // Errors
-import {
-  BadRequestError,
-  ForbiddenError,
-  UnauthenticatedError,
-} from "../errors/allErr";
+import { ForbiddenError, UnauthenticatedError } from "../errors/allErr";
 
 // Auth Request Interface
 import { AuthRequest } from "../interfaces/authRequest";
-// Auth Store
-import AuthStore from "../hashmaps/authStore";
 
 /* ---------------------------------------------------------------------------------------------------------------------------- */
 
@@ -20,7 +14,7 @@ export const authenticate = async (
   next: NextFunction
 ) => {
   // Get Bearer Token
-  const token = req.cookies?.token;
+  const token = req.headers?.token || (req.cookies?.token as any);
 
   if (!token) {
     throw new UnauthenticatedError("Sign In required");
@@ -29,27 +23,6 @@ export const authenticate = async (
   try {
     // Verify Token
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as any;
-
-    if (!AuthStore.hasInstance(decoded.id)) {
-      const User = `${decoded.role}Model` as any;
-
-      const user = await User.findById(decoded.id);
-
-      if (!user) {
-        throw new BadRequestError("User not found");
-      }
-
-      AuthStore.setInstance(decoded.id, {
-        token,
-        ...decoded,
-      });
-    } else {
-      const auth = AuthStore.getInstance(decoded.id) as any;
-
-      if (auth.token !== token) {
-        throw new UnauthenticatedError("Sign In required");
-      }
-    }
 
     // Attach User to Request
     req.user = decoded as any;
