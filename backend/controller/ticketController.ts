@@ -27,7 +27,7 @@ export const createTicket = async (req: AuthRequest, res: Response) => {
     longitude,
   } = req.body;
 
-  const { userId } = req.user as any;
+  const { id } = req.user as any;
 
   if (
     !photo ||
@@ -50,7 +50,7 @@ export const createTicket = async (req: AuthRequest, res: Response) => {
     type_of_waste,
     special_request,
     quantity,
-    resident: userId,
+    resident: id,
     progress: "Pending",
     location: {
       type: "Point",
