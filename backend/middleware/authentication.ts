@@ -20,7 +20,7 @@ export const authenticate = async (
   next: NextFunction
 ) => {
   // Get Bearer Token
-  const token = req.cookies?.cookie;
+  const token = req.cookies?.token;
 
   if (!token) {
     throw new UnauthenticatedError("Sign In required");

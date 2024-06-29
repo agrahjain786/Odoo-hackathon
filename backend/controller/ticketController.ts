@@ -6,8 +6,6 @@ import { StatusCodes } from "http-status-codes";
 import ReportTicketModel from "../models/reportTicket";
 // Errors
 import BadRequestError from "../errors/bad-request";
-// Services
-import { uploadImageData } from "../../service/aws-S3";
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -43,16 +41,7 @@ export const createTicket = async (req: AuthRequest, res: Response) => {
     throw new BadRequestError("Please provide all the required fields");
   }
 
-  let url = "";
-
-  const file = req.file as any;
-
-  if (file) {
-    url = await uploadImageData(
-      file.buffer,
-      `/images/${Date.now()}_${ile}/${file.mimetype}`
-    );
-  }
+  const url = req.file.path.replace("/public", "");
 
   const ticket = await ReportTicketModel.create({
     photo: url,
@@ -128,6 +117,12 @@ export const completeTicket = async (req: AuthRequest, res: Response) => {
     .json({ success: true, message: "Ticket completed", ticket });
 };
 
+/**
+ * @route  GET /api/admin/tickets
+ * @description   Get all Tickets
+ * @query   {page, limit}
+ * @returns {object} success, message, tickets
+ */
 export const getTickets = async (req: AuthRequest, res: Response) => {
   let { page = 1, limit = 10 } = req.query;
   const { latitude, longitude } = req.body;
@@ -146,7 +141,7 @@ export const getTickets = async (req: AuthRequest, res: Response) => {
         },
         distanceField: "distance",
         spherical: true,
-        maxDistance: 10000,
+        maxDistance: 3000,
       },
     },
     {
@@ -157,5 +152,7 @@ export const getTickets = async (req: AuthRequest, res: Response) => {
     },
   ]);
 
-  res.status(StatusCodes.OK).json({ success: true, tickets });
+  res
+    .status(StatusCodes.OK)
+    .json({ success: true, message: "Tickets fetched successfully", tickets });
 };

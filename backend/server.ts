@@ -14,6 +14,7 @@ import resHeadersMiddleware from "./middleware/response-Headers";
 // Routers
 import authRouter from "./router/authRouter";
 import ticketRouter from "./router/ticketRouter";
+import collectorRouter from "./router/collectorRouter";
 
 // Authentication
 import { authenticate } from "./middleware/authentication";
@@ -22,8 +23,11 @@ import express from "express";
 import http from "http";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+const path = require("path");
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 
 const server = http.createServer(app);
 
@@ -33,10 +37,6 @@ app.use(
     credentials: true,
   })
 ); // Setting the CORS policy
-
-app.use("/", (req, res, next) => {
-  res.status(200).send("Server is running !!!");
-});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -50,6 +50,12 @@ app.use(resHeadersMiddleware);
 app.use("/api/auth", authRouter);
 
 app.use("/api/ticket", ticketRouter);
+
+app.use("/api/collector", collectorRouter);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the server");
+});
 
 app.use(errorMiddleware); // Middleware to handle all thrown errors
 app.use(notFoundMiddleware); // Middleware to handle Routes that are not there

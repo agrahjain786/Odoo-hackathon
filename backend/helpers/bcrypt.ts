@@ -1,11 +1,14 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import bcrypt from "bcrypt";
 
 /* -------------------------------------------------------------------------- */
 
 export const hashPassword = async (password: string): Promise<string> => {
   return await bcrypt.hash(
-    process.env.PASSWORD_SALT || "",
-    process.env.SALT_ROUNDS || "8"
+    password,
+    parseInt(process.env.BCRYPT_SALT_ROUNDS || "10")
   );
 };
 

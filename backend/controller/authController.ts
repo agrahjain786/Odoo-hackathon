@@ -7,6 +7,11 @@ import BadRequestError from "../errors/bad-request";
 import AdminModel from "../models/users/admin";
 import ResidentModel from "../models/users/resident";
 import CollectorModel from "../models/users/collector";
+// Helpers
+import { getSignedJwtToken } from "../helpers/jwt";
+import { comparePassword } from "../helpers/bcrypt";
+import { hashPassword } from "./../helpers/bcrypt";
+import { AuthRequest } from "../interfaces/authRequest";
 
 /* --------------------------------------------------------------------------------------------------------- */
 
@@ -46,11 +51,13 @@ export const signUp = async (req: Request, res: Response) => {
 
   let user: any = null;
 
+  const hashedPassword = await hashPassword(password);
+
   if (role === "Admin") {
     user = (await AdminModel.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       role,
       phone,
     })) as any;
@@ -58,7 +65,7 @@ export const signUp = async (req: Request, res: Response) => {
     user = (await ResidentModel.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       role,
       phone,
     })) as any;
@@ -66,7 +73,7 @@ export const signUp = async (req: Request, res: Response) => {
     user = (await CollectorModel.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       role,
       phone,
       address,
@@ -84,7 +91,12 @@ export const signUp = async (req: Request, res: Response) => {
     throw new Error();
   }
 
-  const token: string = user.getSignedJwtToken();
+  const token: string = getSignedJwtToken(user._id, name, email, role);
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
 
   res
     .status(StatusCodes.CREATED)
@@ -124,17 +136,49 @@ export const signIn = async (req: Request, res: Response) => {
     throw new BadRequestError("Invalid credentials");
   }
 
-  const isMatch = await user.comparePassword(password);
+  const isMatch = await comparePassword(password, user.password);
 
   if (!isMatch) {
     throw new BadRequestError("Invalid credentials");
   }
 
-  const token: string = user.getSignedJwtToken();
+  const token: string = getSignedJwtToken(user._id, user.name, email, role);
 
   delete user.password;
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
 
   res
     .status(StatusCodes.OK)
     .json({ success: true, message: "Sign In successfull", user, token });
+};
+
+/**
+ * @route  GET /api/auth/user
+ * @description   Get User Details
+ * @returns {object} success, message, user
+ */
+export const getUserDetails = async (req: AuthRequest, res: Response) => {
+  const { id, role } = req.user as any;
+
+  if (!id || !role) {
+    throw new BadRequestError("Please provide id and role");
+  }
+
+  let user: any = null;
+
+  if (role === "Admin") {
+    user = await AdminModel.findById(id);
+  } else if (role === "Resident") {
+    user = await ResidentModel.findById(id);
+  } else if (role === "Collector") {
+    user = await CollectorModel.findById(id);
+  }
+
+  res
+    .status(StatusCodes.OK)
+    .json({ success: true, message: "User details", user });
 };

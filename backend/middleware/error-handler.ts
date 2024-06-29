@@ -17,6 +17,8 @@ const errorHandlerMiddleware = (
     message: err.message || "Server error try again later",
   };
 
+  console.log(`Error: ${err}`);
+
   return res
     .status(customError.statusCode)
     .json({ success: false, message: customError.message });

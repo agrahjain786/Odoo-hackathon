@@ -1,10 +1,31 @@
 import { Request } from "express";
 import multer from "multer";
+import path from "path";
+import fs from "fs";
 
 // Define allowed MIME types
 const allowedMimeTypes: string[] = ["image/jpeg", "image/jpg", "image/png"];
 
-const storage = multer.memoryStorage();
+// Directory for uploads
+const uploadsDir = path.join(__dirname, "../public");
+
+// Ensure the uploads directory exists, if not create it
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
+const storage = multer.diskStorage({
+  destination: function (
+    req: Request,
+    file: Express.Multer.File,
+    cb: Function
+  ) {
+    cb(null, uploadsDir);
+  },
+  filename: function (req: Request, file: Express.Multer.File, cb: Function) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
 
 // Filter function to check the MIME type (Size filter is yet to add)
 const fileFilter = function (
