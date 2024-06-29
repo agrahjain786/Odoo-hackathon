@@ -25,7 +25,7 @@ const SignIncomp = () => {
       .then((res) => {
         if (res.data.token) {
           localStorage.setItem("token", res.data.token);
-          if (role === 'Resident') {
+          if (role === 'Resident' || role === 'Admin') {
             navigate('/Dashboard');
           } else if (role === 'Collector') {
             navigate('/GarbageNearby');
