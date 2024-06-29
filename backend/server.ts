@@ -12,6 +12,8 @@ import notFoundMiddleware from "./middleware/not-found";
 import resHeadersMiddleware from "./middleware/response-Headers";
 
 // Routers
+import authRouter from "./router/authRouter";
+import ticketRouter from "./router/ticketRouter";
 
 // Authentication
 import { authenticate } from "./middleware/authentication";
@@ -32,6 +34,10 @@ app.use(
   })
 ); // Setting the CORS policy
 
+app.use("/", (req, res, next) => {
+  res.status(200).send("Server is running !!!");
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -41,6 +47,9 @@ app.use(cookieParser());
 app.use(resHeadersMiddleware);
 
 // All Server Routes
+app.use("/api/auth", authRouter);
+
+app.use("/api/ticket", ticketRouter);
 
 app.use(errorMiddleware); // Middleware to handle all thrown errors
 app.use(notFoundMiddleware); // Middleware to handle Routes that are not there
