@@ -27,7 +27,7 @@ const SignIncomp = () => {
           localStorage.setItem("token", res.data.token);
           if (role === 'Resident') {
             navigate('/Dashboard');
-          } else if (role === 'Garbage Collector') {
+          } else if (role === 'Collector') {
             navigate('/GarbageNearby');
           }
         }
@@ -58,8 +58,8 @@ const SignIncomp = () => {
           </div>
           <div className="rradio">
             <div>
-              <input onChange={() => setRole('Garbage Collector')} className="radiobutton" type="radio" value={role} name="role" id='role' />
-              <label className='radiolabels' htmlFor="role">Garbage Collector</label>
+              <input onChange={() => setRole('Collector')} className="radiobutton" type="radio" value={role} name="role" id='role' />
+              <label className='radiolabels' htmlFor="role">Collector</label>
             </div>
             <div>
               <input onChange={() => setRole('Resident')} className="radiobutton" type="radio" value={role} name="role" id='role' />

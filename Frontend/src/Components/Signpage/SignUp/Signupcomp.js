@@ -53,12 +53,12 @@ const Signupcomp = () => {
       phone: phone,
       password: password,
       role: role,
-      address: role === "Garbage Collector" ? address : "",
-      city: role === "Garbage Collector" ? city : "",
-      state: role === "Garbage Collector" ? state : "",
-      pin: role === "Garbage Collector" ? pincode : "",
-      latitude: role === "Garbage Collector" ? latitude : "",
-      longitude: role === "Garbage Collector" ? longitude : "",
+      address: role === "Collector" ? address : "",
+      city: role === "Collector" ? city : "",
+      state: role === "Collector" ? state : "",
+      pin: role === "Collector" ? pincode : "",
+      latitude: role === "Collector" ? latitude : "",
+      longitude: role === "Collector" ? longitude : "",
     };
     console.log(data);
     axios
@@ -70,7 +70,7 @@ const Signupcomp = () => {
           console.log(res.data.token);
           if (role === 'Resident') {
             navigate('/Dashboard');
-          } else if (role === 'Garbage Collector') {
+          } else if (role === 'Collector') {
             navigate('/GarbageNearby');
           }
         }
@@ -123,14 +123,14 @@ const Signupcomp = () => {
               <div className="rradio">
                 <div>
                   <input
-                    onChange={() => handleRoleChange("Garbage Collector")}
+                    onChange={() => handleRoleChange("Collector")}
                     className="radiobutton"
                     type="radio"
-                    checked={role === "Garbage Collector"}
+                    checked={role === "Collector"}
                     name="role"
                   />
                   <label className="radiolabels" htmlFor="role">
-                    Garbage Collector
+                    Collector
                   </label>
                 </div>
                 <div>
@@ -171,7 +171,7 @@ const Signupcomp = () => {
                 placeholder="Password"
               />
             </div>
-            {role === "Garbage Collector" && (
+            {role === "Collector" && (
               <>
                 <div className="text2">
                   <span></span>

@@ -9,7 +9,7 @@ const getRandomPointsWithinRadius = (latitude, longitude, radiusInMeters, numPoi
     const distance = Math.random() * radiusInMeters / 111300; // Convert meters to degrees
     const newLat = latitude + distance * Math.cos(angle);
     const newLng = longitude + distance * Math.sin(angle);
-    points.push({ lat: newLat, lng: newLng, text: `Garbage Collector ${i + 1}` });
+    points.push({ lat: newLat, lng: newLng, text: `Collector ${i + 1}` });
   }
   return points;
 };

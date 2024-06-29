@@ -11,7 +11,7 @@ const GCN = () => {
         <div className='gc_container'>
         <div className='gc_wrapper'>
         <div className='gc_heading'>
-            <h1 style={{fontSize:'40px', marginTop:'3rem'}}>Garbage Collector Nearby</h1>
+            <h1 style={{fontSize:'40px', marginTop:'3rem'}}>Collector Nearby</h1>
         </div>
         <GeoTag/>
         </div>
