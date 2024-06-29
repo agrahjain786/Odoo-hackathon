@@ -1,0 +1,48 @@
+
+
+.homepage{
+    display: flex;
+ /* border: 2px solid red; */
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    /* background-image: url('../../Assets/bg-image.jpg'); */
+    background-image: url('../../Assets/bg-image.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+    .heading{
+        font-family: sans-serif;
+        color: white;
+        font-size: 50px;
+    }
+   .buttons{
+    display: flex;
+    padding: 50px;
+   }
+
+    .dispose-waste{
+        border: 4px white solid;
+    background-color: transparent;
+    color: white;
+    font-family: sans-serif;
+    margin: 20px;
+    height: 50px;
+    width: 160px;
+   }
+
+
+
+   .recycle-waste{
+        border: 4px white solid;
+    background-color: transparent;
+    color: white;
+    font-family: sans-serif;
+    margin: 20px;
+    height: 50px;
+    width: 160px;
+
+    
+   }

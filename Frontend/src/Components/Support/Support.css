@@ -1,0 +1,35 @@
+.Support{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 98.9vw; */
+    height: 25vh;
+    background: url('../../Assets/support_bg.png');
+}
+.iconbox{
+    display: flex;
+    justify-content: center;
+}
+.hearticon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    margin-bottom: -2rem;
+    border-radius: 4rem;
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+}
+.Support span{
+    background:green;
+    color: white;
+    width: 17rem;
+    height:2.5rem;
+    font-size:1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.4rem;
+    font-weight: 600;
+}
