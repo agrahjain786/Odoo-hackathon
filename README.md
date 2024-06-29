@@ -50,3 +50,14 @@ This application is designed to tackle public litter by providing an efficient g
 2. Install dependencies:
    ```bash
    npm install
+3. Start the MongoDB server:
+ ```bash
+mongod
+4.  Compile TypeScript:
+```bash
+npm run build
+5. Start the application:
+```bash
+npm start
+
+   
