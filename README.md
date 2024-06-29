@@ -1,4 +1,4 @@
-# Odoo-hackathon 
+# Odoo-hackathon
 
 # Garbage Management Application
 
@@ -9,14 +9,17 @@ This application is designed to tackle public litter by providing an efficient g
 ## Features
 
 1. **User Authentication and Authorization**
+
    - Secure login system for different user roles: residents, garbage collectors, and administrators.
    - Role-based access control ensuring appropriate access to features.
 
 2. **Reporting System**
+
    - Users can report litter hotspots by uploading photos and descriptions.
    - Geotagging feature to pinpoint exact locations on a map.
 
 3. **Task Assignment and Management**
+
    - Admins can assign reported litter cases to nearby garbage collectors.
    - Track the progress of cleanup tasks in real-time.
    - Notification system to inform collectors of new assignments.
@@ -43,10 +46,14 @@ This application is designed to tackle public litter by providing an efficient g
 ### Installation
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/your-username/garbage-management-app.git
-   cd garbage-management-app
+   git clone https://github.com/agrahjain786/Odoo-hackathon
+   ```
+
+   cd into frontend and then into backend and follow the scripts in package.json
 
 2. Install dependencies:
    ```bash
    npm install
+   ```
