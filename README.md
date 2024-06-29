@@ -48,4 +48,5 @@ This application is designed to tackle public litter by providing an efficient g
    cd garbage-management-app
 
 2. Install dependencies:
+   ```bash
    npm install
