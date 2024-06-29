@@ -24,18 +24,18 @@ export default class AuthStore {
     return AuthStore.instances[id];
   }
 
-  public static hasInstance(email: string): boolean {
-    return Boolean(AuthStore.instances[email]);
+  public static hasInstance(id: string): boolean {
+    return Boolean(AuthStore.instances[id]);
   }
 
   public static getAllInstances() {
     return AuthStore.instances;
   }
 
-  public static deleteInstance(email: string): void {
-    if (!AuthStore.instances[email]) return;
+  public static deleteInstance(id: string): void {
+    if (!AuthStore.instances[id]) return;
 
-    delete AuthStore.instances[email];
+    delete AuthStore.instances[id];
   }
 
   public static resetStore() {
